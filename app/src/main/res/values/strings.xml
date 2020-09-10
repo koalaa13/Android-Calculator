@@ -17,5 +17,7 @@
     <string name="minus_symbol">-</string>
     <string name="mul_symbol">*</string>
     <string name="div_symbol">/</string>
+    <string name="incorrect_expression">error</string>
+    <string name="delete_symbol">⌫</string>
 
 </resources>
