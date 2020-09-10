@@ -6,67 +6,65 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50sp" />
+        android:textIsSelectable="true"
+        android:textSize="50sp"
+        android:gravity="right"/>
 
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="4">
 
         <LinearLayout
             android:id="@+id/first_column"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_plus"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/plus_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_1"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/one_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_4"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/four_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_7"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/seven_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/separator_button"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/separator_symbol"
                 android:textSize="50sp" />
@@ -75,7 +73,7 @@
 
         <LinearLayout
             android:id="@+id/second_column"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -83,45 +81,40 @@
 
             <Button
                 android:id="@+id/button_minus"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/minus_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_2"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/two_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_5"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/five_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_8"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/eight_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_0"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/zero_symbol"
                 android:textSize="50sp" />
@@ -130,52 +123,47 @@
 
         <LinearLayout
             android:id="@+id/third_column"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_mul"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/mul_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_3"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/three_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_6"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/six_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_9"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/nine_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_c"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/clear_symbol"
                 android:textSize="50sp" />
@@ -185,35 +173,31 @@
 
         <LinearLayout
             android:id="@+id/fourth_column"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="5">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_div"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/div_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/delete_button"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/delete_symbol"
                 android:textSize="50sp" />
 
             <Button
                 android:id="@+id/button_res"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="@string/res_symbol"
                 android:textSize="50sp" />
