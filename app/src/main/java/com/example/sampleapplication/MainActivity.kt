@@ -10,16 +10,10 @@ import java.math.BigDecimal
 class MainActivity : AppCompatActivity() {
     companion object {
         const val TAG = "MainActivity"
-
     }
 
-    val OPERATIONS = charArrayOf(
-        getString(R.string.plus_symbol)[0],
-        getString(R.string.minus_symbol)[0],
-        getString(R.string.mul_symbol)[0],
-        getString(R.string.div_symbol)[0]
-    )
-    val incorrectExpression = getString(R.string.incorrect_expression)
+    private lateinit var operations: CharArray
+    private lateinit var incorrectExpression: String
     lateinit var result: EditText
     lateinit var button0: Button
     lateinit var button1: Button
@@ -40,14 +34,20 @@ class MainActivity : AppCompatActivity() {
     lateinit var resButton: Button
     lateinit var deleteButton: Button
 
-    var expression: String = ""
-    var flag = false
+    private var expression: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.i(TAG, "onCreate");
 
+        operations = charArrayOf(
+            getString(R.string.plus_symbol)[0],
+            getString(R.string.minus_symbol)[0],
+            getString(R.string.mul_symbol)[0],
+            getString(R.string.div_symbol)[0]
+        )
+        incorrectExpression = getString(R.string.incorrect_expression)
         result = findViewById(R.id.result)
         button0 = findViewById(R.id.button_0)
         button1 = findViewById(R.id.button_1)
@@ -81,11 +81,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun evalExpression() {
-        if (expression.filter { ch -> OPERATIONS.contains(ch) }.count() != 1) {
+        if (expression.filter { ch -> operations.contains(ch) }.count() != 1) {
             expression = incorrectExpression
             return
         }
-        val operationIndex = expression.indexOfAny(OPERATIONS)
+        val operationIndex = expression.indexOfAny(operations)
         if (operationIndex >= 0) {
             val firstNumber: BigDecimal? =
                 (expression.substring(0, operationIndex)).toBigDecimalOrNull()
