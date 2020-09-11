@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.math.BigDecimal
 import kotlin.math.exp
 
@@ -224,7 +225,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         addButton = findViewById(R.id.button_plus)
-
         addButton.setOnClickListener {
             if (isLastSymbolDig() && !wasOperation) {
                 expression += '+'
@@ -235,8 +235,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         subButton = findViewById(R.id.button_minus)
+        subButton.setOnClickListener {
+            if (expression.isEmpty() || (isLastSymbolDig() && !wasOperation)) {
+                wasOperation = expression.isNotEmpty()
+                expression += '-'
+                isLastButtonRes = false
+                updateResult()
+            }
+        }
+
         mulButton = findViewById(R.id.button_mul)
+        mulButton.setOnClickListener {
+            if (isLastSymbolDig() && !wasOperation) {
+                expression += '*'
+                isLastButtonRes = false
+                wasOperation = true
+                updateResult()
+            }
+        }
         divButton = findViewById(R.id.button_div)
+        divButton.setOnClickListener {
+            if (isLastSymbolDig() && !wasOperation) {
+                expression += '/'
+                isLastButtonRes = false
+                wasOperation = true
+                updateResult()
+            }
+        }
         resButton = findViewById(R.id.button_res)
 
         resButton.setOnClickListener {
@@ -280,11 +305,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun evalExpression() {
-        if (expression.filter { ch -> operations.contains(ch) }.count() != 1) {
+        var needOperationsCount: Int = 1
+        if (expression.isNotEmpty() && expression[0] == '-') {
+            needOperationsCount++
+        }
+        if (expression.filter { ch -> operations.contains(ch) }.count() != needOperationsCount) {
             expression = incorrectExpression
             return
         }
-        val operationIndex = expression.indexOfAny(operations)
+        val operationIndex = expression.lastIndexOfAny(operations)
         if (operationIndex >= 0) {
             val firstNumber: BigDecimal? =
                 (expression.substring(0, operationIndex)).toBigDecimalOrNull()
