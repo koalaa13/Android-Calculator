@@ -12,6 +12,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         const val TAG = "MainActivity"
         val OPERATIONS = charArrayOf('+', '-', '*', '/')
         val CORRECT_EXPRESSION = """-?\d*\.?\d*[-+*/]-?\d*\.?\d*""".toRegex()
+        const val EXPRESSION_KEY = "EXPRESSION_KEY"
+        const val OPERATION_INDEX_KEY = "OPERATION_INDEX_KEY"
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState")
+        outState.putString(EXPRESSION_KEY, expression)
+        outState.putInt(OPERATION_INDEX_KEY, operationIndex)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i(TAG, "onRestoreInstanceState")
+        super.onRestoreInstanceState(savedInstanceState)
+        expression = savedInstanceState.getString(EXPRESSION_KEY).toString()
+        operationIndex = savedInstanceState.getInt(OPERATION_INDEX_KEY)
+        if (expression != "") {
+            updateResult()
+        }
     }
 
     private lateinit var incorrectExpressionMessage: String
