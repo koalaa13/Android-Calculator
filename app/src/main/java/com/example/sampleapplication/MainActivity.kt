@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val TAG = "MainActivity"
         val OPERATIONS = charArrayOf('+', '-', '*', '/')
-        val CORRECT_EXPRESSION = """-?\d*\.?\d*[-+*/]-?\d*\.?\d*""".toRegex()
         const val EXPRESSION_KEY = "EXPRESSION_KEY"
         const val OPERATION_INDEX_KEY = "OPERATION_INDEX_KEY"
     }
@@ -96,6 +95,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         incorrectExpressionMessage = getString(R.string.incorrect_expression)
 
         result = findViewById(R.id.result)
+        result.isSelected = true
+//        result.movementMethod = ScrollingMovementMethod()
         button0 = findViewById(R.id.button_0)
         button0.setOnClickListener(this)
 
@@ -185,10 +186,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun evalExpression() {
         if (expression.toDoubleOrNull() != null) {
-            return
-        }
-        if (!expression.matches(CORRECT_EXPRESSION)) {
-            expression = incorrectExpressionMessage
             return
         }
         if (operationIndex >= 0) {
