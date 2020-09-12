@@ -3,10 +3,11 @@ package com.example.sampleapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val TAG = "MainActivity"
         val OPERATIONS = charArrayOf('+', '-', '*', '/')
@@ -30,26 +31,43 @@ class MainActivity : AppCompatActivity() {
     lateinit var addButton: Button
     lateinit var subButton: Button
     lateinit var mulButton: Button
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(TAG, "onStop")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i(TAG, "onDestroy")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i(TAG, "onRestart")
+    }
+
     lateinit var divButton: Button
     lateinit var resButton: Button
     lateinit var deleteButton: Button
 
     private var expression: String = ""
     private var operationIndex = -1
-
-//    private class DigitsListener : View.OnClickListener {
-//        override fun onClick(button: View?) {
-//            if (expression == incorrectExpression) {
-//                expression = ""
-//            }
-//            if (isLeadingZero()) {
-//                expression = expression.dropLast(1)
-//            }
-//            expression += '1'
-//            updateResult()
-//        }
-//
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,245 +78,58 @@ class MainActivity : AppCompatActivity() {
 
         result = findViewById(R.id.result)
         button0 = findViewById(R.id.button_0)
-
-        button0.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '0'
-            updateResult()
-        }
+        button0.setOnClickListener(this)
 
         button1 = findViewById(R.id.button_1)
-
-        button1.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '1'
-            updateResult()
-        }
+        button1.setOnClickListener(this)
 
         button2 = findViewById(R.id.button_2)
-
-        button2.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '2'
-            updateResult()
-        }
+        button2.setOnClickListener(this)
 
         button3 = findViewById(R.id.button_3)
-
-        button3.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '3'
-            updateResult()
-        }
+        button3.setOnClickListener(this)
 
         button4 = findViewById(R.id.button_4)
-
-        button4.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '4'
-            updateResult()
-        }
+        button4.setOnClickListener(this)
 
         button5 = findViewById(R.id.button_5)
-
-        button5.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '5'
-            updateResult()
-        }
+        button5.setOnClickListener(this)
 
         button6 = findViewById(R.id.button_6)
-
-        button6.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '6'
-            updateResult()
-        }
+        button6.setOnClickListener(this)
 
         button7 = findViewById(R.id.button_7)
-
-        button7.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '7'
-            updateResult()
-        }
+        button7.setOnClickListener(this)
 
         button8 = findViewById(R.id.button_8)
-
-        button8.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '8'
-            updateResult()
-        }
+        button8.setOnClickListener(this)
 
         button9 = findViewById(R.id.button_9)
-
-        button9.setOnClickListener {
-            if (expression == incorrectExpressionMessage) {
-                expression = ""
-            }
-            if (isLeadingZero()) {
-                expression = expression.dropLast(1)
-            }
-            expression += '9'
-            updateResult()
-        }
+        button9.setOnClickListener(this)
 
         separatorButton = findViewById(R.id.separator_button)
-
-        separatorButton.setOnClickListener {
-            if (canPutSeparatorChar()) {
-                expression += '.'
-                updateResult()
-            }
-        }
+        separatorButton.setOnClickListener(this)
 
         clearButton = findViewById(R.id.button_c)
-
-        clearButton.setOnClickListener {
-            expression = ""
-            operationIndex = -1
-            updateResult()
-        }
+        clearButton.setOnClickListener(this)
 
         addButton = findViewById(R.id.button_plus)
-        addButton.setOnClickListener {
-            if (isLastSymbolDig() && operationIndex == -1) {
-                operationIndex = expression.length
-                expression += '+'
-            } else {
-                if (isLastSymbolOperation()) {
-                    expression = expression.dropLast(1)
-                    expression += '+'
-                }
-            }
-            updateResult()
-        }
+        addButton.setOnClickListener(this)
 
         subButton = findViewById(R.id.button_minus)
-        subButton.setOnClickListener {
-            if (operationIndex == -1) {
-                if (expression.isEmpty()) {
-                    expression += '-'
-                }
-                if (isLastSymbolDig()) {
-                    operationIndex = expression.length
-                    expression += '-'
-                }
-            } else {
-                if (isLastSymbolOperation()) {
-                    if (OPERATIONS.contains(expression[expression.length - 1])) {
-                        if (expression[expression.length - 1] in charArrayOf('+', '-')) {
-                            expression = expression.dropLast(1)
-                        }
-                        expression += '-'
-                    }
-                }
-            }
-            updateResult()
-        }
+        subButton.setOnClickListener(this)
 
         mulButton = findViewById(R.id.button_mul)
-        mulButton.setOnClickListener {
-            if (isLastSymbolDig() && operationIndex == -1) {
-                operationIndex = expression.length
-                expression += '*'
-            } else {
-                if (isLastSymbolOperation()) {
-                    expression = expression.dropLast(1)
-                    expression += '*'
-                }
-            }
-            updateResult()
-        }
-        divButton = findViewById(R.id.button_div)
-        divButton.setOnClickListener {
-            if (isLastSymbolDig() && operationIndex == -1) {
-                operationIndex = expression.length
-                expression += '/'
-            } else {
-                if (isLastSymbolOperation()) {
-                    expression = expression.dropLast(1)
-                    expression += '/'
-                }
-            }
-            updateResult()
-        }
-        resButton = findViewById(R.id.button_res)
+        mulButton.setOnClickListener(this)
 
-        resButton.setOnClickListener {
-            if (expression != "") {
-                evalExpression()
-                operationIndex = -1
-                updateResult()
-            }
-        }
+        divButton = findViewById(R.id.button_div)
+        divButton.setOnClickListener(this)
+
+        resButton = findViewById(R.id.button_res)
+        resButton.setOnClickListener(this)
 
         deleteButton = findViewById(R.id.delete_button)
-
-        deleteButton.setOnClickListener {
-            if (expression.isNotEmpty()) {
-                if (expression == incorrectExpressionMessage) {
-                    expression = ""
-                } else {
-                    if (isLastSymbolOperation()) {
-                        operationIndex = -1
-                    }
-                    expression = expression.dropLast(1)
-                }
-                updateResult()
-            }
-        }
-
-    }
-
-    private fun canPutOperation(): Boolean {
-        return expression.toDoubleOrNull() != null
+        deleteButton.setOnClickListener(this)
     }
 
     private fun canPutSeparatorChar(): Boolean {
@@ -317,7 +148,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isLeadingZero(): Boolean {
-        return expression == "0" || (expression.length > 1 && OPERATIONS.contains(expression[expression.length - 2]) && expression[expression.length - 1] == '0')
+        return expression == "0" || (expression.length > 1 && operationIndex == expression.length - 2 && expression[expression.length - 1] == '0')
     }
 
     private fun updateResult() {
@@ -365,4 +196,83 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onClick(v: View?) {
+        if (v == null) {
+            return
+        }
+        val id = v.id
+        if (v is Button) {
+            if (id == R.id.button_0 || id == R.id.button_1 || id == R.id.button_2 || id == R.id.button_3 || id == R.id.button_4 ||
+                id == R.id.button_5 || id == R.id.button_6 || id == R.id.button_7 || id == R.id.button_8 || id == R.id.button_9
+
+            ) {
+                if (expression == incorrectExpressionMessage) {
+                    expression = ""
+                }
+                if (isLeadingZero()) {
+                    expression = expression.dropLast(1)
+                }
+                expression += v.text
+            }
+            if (id == R.id.separator_button) {
+                if (canPutSeparatorChar()) {
+                    expression += v.text
+                }
+            }
+            if (id == R.id.button_c) {
+                expression = ""
+                operationIndex = -1
+            }
+            if (id == R.id.button_plus || id == R.id.button_div || id == R.id.button_mul) {
+                if (isLastSymbolDig() && operationIndex == -1) {
+                    operationIndex = expression.length
+                    expression += v.text
+                } else {
+                    if (isLastSymbolOperation()) {
+                        expression = expression.dropLast(1)
+                        expression += v.text
+                    }
+                }
+            }
+            if (id == R.id.button_minus) {
+                if (operationIndex == -1) {
+                    if (expression.isEmpty()) {
+                        expression += '-'
+                    }
+                    if (isLastSymbolDig()) {
+                        operationIndex = expression.length
+                        expression += '-'
+                    }
+                } else {
+                    if (isLastSymbolOperation()) {
+                        if (OPERATIONS.contains(expression[expression.length - 1])) {
+                            if (expression[expression.length - 1] in charArrayOf('+', '-')) {
+                                expression = expression.dropLast(1)
+                            }
+                            expression += '-'
+                        }
+                    }
+                }
+            }
+            if (id == R.id.button_res) {
+                if (expression != "") {
+                    evalExpression()
+                    operationIndex = -1
+                }
+            }
+            if (id == R.id.delete_button) {
+                if (expression.isNotEmpty()) {
+                    if (expression == incorrectExpressionMessage) {
+                        expression = ""
+                    } else {
+                        if (isLastSymbolOperation()) {
+                            operationIndex = -1
+                        }
+                        expression = expression.dropLast(1)
+                    }
+                }
+            }
+        }
+        updateResult()
+    }
 }
