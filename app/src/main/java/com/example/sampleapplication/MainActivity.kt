@@ -15,40 +15,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         const val OPERATION_INDEX_KEY = "OPERATION_INDEX_KEY"
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        Log.i(TAG, "onSaveInstanceState")
-        outState.putString(EXPRESSION_KEY, expression)
-        outState.putInt(OPERATION_INDEX_KEY, operationIndex)
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        Log.i(TAG, "onRestoreInstanceState")
-        super.onRestoreInstanceState(savedInstanceState)
-        expression = savedInstanceState.getString(EXPRESSION_KEY).toString()
-        operationIndex = savedInstanceState.getInt(OPERATION_INDEX_KEY)
-        if (expression != "") {
-            updateResult()
-        }
-    }
-
     private lateinit var incorrectExpressionMessage: String
-    lateinit var result: TextView
-    lateinit var button0: Button
-    lateinit var button1: Button
-    lateinit var button2: Button
-    lateinit var button3: Button
-    lateinit var button4: Button
-    lateinit var button5: Button
-    lateinit var button6: Button
-    lateinit var button7: Button
-    lateinit var button8: Button
-    lateinit var button9: Button
-    lateinit var separatorButton: Button
-    lateinit var clearButton: Button
-    lateinit var addButton: Button
-    lateinit var subButton: Button
-    lateinit var mulButton: Button
+    private lateinit var result: TextView
+    private lateinit var button0: Button
+    private lateinit var button1: Button
+    private lateinit var button2: Button
+    private lateinit var button3: Button
+    private lateinit var button4: Button
+    private lateinit var button5: Button
+    private lateinit var button6: Button
+    private lateinit var button7: Button
+    private lateinit var button8: Button
+    private lateinit var button9: Button
+    private lateinit var separatorButton: Button
+    private lateinit var clearButton: Button
+    private lateinit var addButton: Button
+    private lateinit var subButton: Button
+    private lateinit var mulButton: Button
+    private lateinit var divButton: Button
+    private lateinit var resButton: Button
+    private lateinit var deleteButton: Button
+
+    private var expression: String = ""
+    private var operationIndex = -1
 
     override fun onStart() {
         super.onStart()
@@ -80,12 +69,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.i(TAG, "onRestart")
     }
 
-    lateinit var divButton: Button
-    lateinit var resButton: Button
-    lateinit var deleteButton: Button
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState")
+        outState.putString(EXPRESSION_KEY, expression)
+        outState.putInt(OPERATION_INDEX_KEY, operationIndex)
+        super.onSaveInstanceState(outState)
+    }
 
-    private var expression: String = ""
-    private var operationIndex = -1
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i(TAG, "onRestoreInstanceState")
+        super.onRestoreInstanceState(savedInstanceState)
+        expression = savedInstanceState.getString(EXPRESSION_KEY).toString()
+        operationIndex = savedInstanceState.getInt(OPERATION_INDEX_KEY)
+        if (expression != "") {
+            updateResult()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
