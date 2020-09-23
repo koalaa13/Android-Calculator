@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
@@ -16,25 +16,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private lateinit var incorrectExpressionMessage: String
-    private lateinit var result: TextView
-    private lateinit var button0: Button
-    private lateinit var button1: Button
-    private lateinit var button2: Button
-    private lateinit var button3: Button
-    private lateinit var button4: Button
-    private lateinit var button5: Button
-    private lateinit var button6: Button
-    private lateinit var button7: Button
-    private lateinit var button8: Button
-    private lateinit var button9: Button
-    private lateinit var separatorButton: Button
-    private lateinit var clearButton: Button
-    private lateinit var addButton: Button
-    private lateinit var subButton: Button
-    private lateinit var mulButton: Button
-    private lateinit var divButton: Button
-    private lateinit var resButton: Button
-    private lateinit var deleteButton: Button
 
     private var expression: String = ""
     private var operationIndex = -1
@@ -91,63 +72,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         Log.i(TAG, "onCreate")
 
+
         incorrectExpressionMessage = getString(R.string.incorrect_expression)
 
-        result = findViewById(R.id.result)
         result.isSelected = true
-//        result.movementMethod = ScrollingMovementMethod()
-        button0 = findViewById(R.id.button_0)
         button0.setOnClickListener(this)
-
-        button1 = findViewById(R.id.button_1)
         button1.setOnClickListener(this)
-
-        button2 = findViewById(R.id.button_2)
         button2.setOnClickListener(this)
-
-        button3 = findViewById(R.id.button_3)
         button3.setOnClickListener(this)
-
-        button4 = findViewById(R.id.button_4)
         button4.setOnClickListener(this)
-
-        button5 = findViewById(R.id.button_5)
         button5.setOnClickListener(this)
-
-        button6 = findViewById(R.id.button_6)
         button6.setOnClickListener(this)
-
-        button7 = findViewById(R.id.button_7)
         button7.setOnClickListener(this)
-
-        button8 = findViewById(R.id.button_8)
         button8.setOnClickListener(this)
-
-        button9 = findViewById(R.id.button_9)
         button9.setOnClickListener(this)
-
-        separatorButton = findViewById(R.id.separator_button)
         separatorButton.setOnClickListener(this)
-
-        clearButton = findViewById(R.id.button_c)
         clearButton.setOnClickListener(this)
-
-        addButton = findViewById(R.id.button_plus)
         addButton.setOnClickListener(this)
-
-        subButton = findViewById(R.id.button_minus)
         subButton.setOnClickListener(this)
-
-        mulButton = findViewById(R.id.button_mul)
         mulButton.setOnClickListener(this)
-
-        divButton = findViewById(R.id.button_div)
         divButton.setOnClickListener(this)
-
-        resButton = findViewById(R.id.button_res)
         resButton.setOnClickListener(this)
-
-        deleteButton = findViewById(R.id.delete_button)
         deleteButton.setOnClickListener(this)
     }
 
@@ -217,8 +162,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         val id = v.id
         if (v is Button) {
-            if (id == R.id.button_0 || id == R.id.button_1 || id == R.id.button_2 || id == R.id.button_3 || id == R.id.button_4 ||
-                id == R.id.button_5 || id == R.id.button_6 || id == R.id.button_7 || id == R.id.button_8 || id == R.id.button_9
+            if (id == R.id.button0 || id == R.id.button1 || id == R.id.button2 || id == R.id.button3 || id == R.id.button4 ||
+                id == R.id.button5 || id == R.id.button6 || id == R.id.button7 || id == R.id.button8 || id == R.id.button9
 
             ) {
                 if (expression == incorrectExpressionMessage) {
@@ -229,16 +174,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 expression += v.text
             }
-            if (id == R.id.separator_button) {
+            if (id == R.id.separatorButton) {
                 if (canPutSeparatorChar()) {
                     expression += v.text
                 }
             }
-            if (id == R.id.button_c) {
+            if (id == R.id.clearButton) {
                 expression = ""
                 operationIndex = -1
             }
-            if (id == R.id.button_plus || id == R.id.button_div || id == R.id.button_mul) {
+            if (id == R.id.addButton || id == R.id.divButton || id == R.id.mulButton) {
                 if (isLastSymbolDig() && operationIndex == -1) {
                     operationIndex = expression.length
                     expression += v.text
@@ -249,7 +194,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-            if (id == R.id.button_minus) {
+            if (id == R.id.subButton) {
                 if (operationIndex == -1) {
                     if (expression.isEmpty()) {
                         expression += '-'
@@ -269,13 +214,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-            if (id == R.id.button_res) {
+            if (id == R.id.resButton) {
                 if (expression != "") {
                     evalExpression()
                     operationIndex = -1
                 }
             }
-            if (id == R.id.delete_button) {
+            if (id == R.id.deleteButton) {
                 if (expression.isNotEmpty()) {
                     if (expression == incorrectExpressionMessage) {
                         expression = ""
